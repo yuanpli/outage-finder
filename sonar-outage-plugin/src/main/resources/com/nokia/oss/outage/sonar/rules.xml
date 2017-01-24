@@ -1,0 +1,134 @@
+<rules>
+
+    <rule key="OUTAGE_IO_UNCLOSED_RESOURCE">
+        <priority>BLOCKER</priority>
+        <name><![CDATA[Outage - The resource is not closed or not closed in finally block]]></name>
+        <configKey><![CDATA[OUTAGE_IO_UNCLOSED_RESOURCE]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_IO_RESOURCE_MAY_FAIL_TO_CLOSE">
+        <priority>CRITICAL</priority>
+        <name><![CDATA[Outage - The resource may fail to close due to the exception of previous IO operation]]></name>
+        <configKey><![CDATA[OUTAGE_IO_RESOURCE_MAY_FAIL_TO_CLOSE]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_IO_RESOURCE_AS_RETURN_VALUE">
+        <priority>INFO</priority>
+        <name><![CDATA[Outage - The resource is return value, which may fail to close in the subsequent methods]]></name>
+        <configKey><![CDATA[OUTAGE_IO_RESOURCE_AS_RETURN_VALUE]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_IO_RESOURCE_AS_METHOD_INPUT_PARAMETER">
+        <priority>INFO</priority>
+        <name>
+            <![CDATA[Outage - The resource is an input parameter, and is not closed in this method, it maybe an unclosed resource]]></name>
+        <configKey><![CDATA[OUTAGE_IO_RESOURCE_AS_METHOD_INPUT_PARAMETER]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_IO_RESOURCE_PASSED_TO_METHOD_AS_PARAMETER">
+        <priority>INFO</priority>
+        <name>
+            <![CDATA[Outage - The resource is passed into a method as parameter, and is not closed where it's opened, it may fail to close in the target method]]></name>
+        <configKey><![CDATA[Outage - OUTAGE_IO_RESOURCE_PASSED_TO_METHOD_AS_PARAMETER]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_THREAD_NOT_MANAGED_BY_POOL">
+        <priority>MAJOR</priority>
+        <name><![CDATA[Outage - The thread is not managed by pool]]></name>
+        <configKey><![CDATA[OUTAGE_THREAD_NOT_MANAGED_BY_POOL]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_THREAD_POOL_WITHOUT_SIZE_LIMITATION">
+        <priority>MAJOR</priority>
+        <name><![CDATA[Outage - The thread pool has no size limitation]]></name>
+        <configKey><![CDATA[OUTAGE_THREAD_POOL_WITHOUT_SIZE_LIMITATION]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_THREAD_POOL_WITHOUT_QUEUE_SIZE_LIMITATION">
+        <priority>MAJOR</priority>
+        <name><![CDATA[Outage - The thread pool use a default task queue, which has no limitation of queue size]]></name>
+        <configKey><![CDATA[OUTAGE_THREAD_POOL_WITHOUT_QUEUE_SIZE_LIMITATION]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_THREAD_BLOCKING_QUEUE_WITHOUT_SIZE_LIMITATION">
+        <priority>MAJOR</priority>
+        <name><![CDATA[Outage - The blocking queue has no size limitation]]></name>
+        <configKey><![CDATA[OUTAGE_THREAD_BLOCKING_QUEUE_WITHOUT_SIZE_LIMITATION]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_THREAD_INTERRUPTED_EXCEPTION_CAUGHT_WITHOUT_RESET_INTERRUPTION_STATUS">
+        <priority>INFO</priority>
+        <name><![CDATA[Outage - While InterruptedException is caught, the interruption status is not reset]]></name>
+        <configKey><![CDATA[OUTAGE_THREAD_INTERRUPTED_EXCEPTION_CAUGHT_WITHOUT_RESET_INTERRUPTION_STATUS]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_THREAD_INTERRUPTED_EXCEPTION_CAUGHT_WITHOUT_BREAK_THE_LOOP">
+        <priority>MAJOR</priority>
+        <name><![CDATA[Outage - While InterruptedException is caught, the loop is not terminated!]]></name>
+        <configKey><![CDATA[OUTAGE_THREAD_INTERRUPTED_EXCEPTION_CAUGHT_WITHOUT_BREAK_THE_LOOP]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_CPU_WHILE_TRUE_LOOP_WITHOUT_QUIT_STATEMENT">
+        <priority>MAJOR</priority>
+        <name>
+            <![CDATA[Outage - There is no 'break' or 'return' statement in 'while(true)' block, it's impossible to reach the 'exit' point]]></name>
+        <configKey><![CDATA[OUTAGE_CPU_WHILE_TRUE_LOOP_WITHOUT_QUIT_STATEMENT]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_CONCURRENCY_USE_NONE_ATOMIC_OPERATION_ON_THREAD_SAFE_COLLECTION">
+        <priority>BLOCKER</priority>
+        <name>
+            <![CDATA[Outage - None atomic operations, such as 'put if absent' or 'replace', are performed on thread safe type. Consider use the atomic API directly]]></name>
+        <configKey><![CDATA[OUTAGE_CONCURRENCY_USE_NONE_ATOMIC_OPERATION_ON_THREAD_SAFE_COLLECTION]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_CONCURRENCY_LOCK_IS_NOT_UNLOCKED_IN_FINALLY_BLOCK">
+        <priority>BLOCKER</priority>
+        <name>
+            <![CDATA[Outage - The lock is not unlocked in finally block which may cause dead lock if runtime exception is thrown]]></name>
+        <configKey><![CDATA[OUTAGE_CONCURRENCY_LOCK_IS_NOT_UNLOCKED_IN_FINALLY_BLOCK]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_CONCURRENCY_SYNCHRONIZE_ON_LOCAL_VARIABLE">
+        <priority>BLOCKER</priority>
+        <name>
+            <![CDATA[Outage - Synchronize on local variable is usually useless, because in most cases the local variables cannot be shared by multiple threads]]></name>
+        <configKey><![CDATA[OUTAGE_CONCURRENCY_SYNCHRONIZE_ON_LOCAL_VARIABLE]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_CONCURRENCY_WAIT_AND_NOTIFY">
+        <priority>INFO</priority>
+        <name>
+            <![CDATA[Outage - The wait() and notify() call is difficult to use, use java.util.concurrent.BlockingQueue after Java 5]]></name>
+        <configKey><![CDATA[OUTAGE_CONCURRENCY_WAIT_AND_NOTIFY]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_CONCURRENCY_NESTED_SYNCHRONIZATION">
+        <priority>INFO</priority>
+        <name>
+            <![CDATA[Outage - Nested synchronization is error prone, use explicit lock from java.util.concurrent.locks.Lock after Java 5]]></name>
+        <configKey><![CDATA[OUTAGE_CONCURRENCY_NESTED_SYNCHRONIZATION]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_EXCEPTION_IGNORE_EXCEPTION_IN_CATCH_STATEMENT">
+        <priority>MAJOR</priority>
+        <name>
+            <![CDATA[Outage - The original exception is ignored when new exception is thrown, which cause it's impossible to find the root cause]]></name>
+        <configKey><![CDATA[OUTAGE_EXCEPTION_IGNORE_EXCEPTION_IN_CATCH_STATEMENT]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_MEMORY_DO_NOT_START_PROCESS_IN_JAVA">
+        <priority>MAJOR</priority>
+        <name>
+            <![CDATA[Outage - Start process in Java will folk a new process which may cost the same memory usage, then cause OutOfMemory error]]></name>
+        <configKey><![CDATA[OUTAGE_MEMORY_DO_NOT_START_PROCESS_IN_JAVA]]></configKey>
+    </rule>
+
+    <rule key="OUTAGE_MEMORY_JAXB_CONTEXT_RE_CREATION">
+        <priority>MAJOR</priority>
+        <name>
+            <![CDATA[Outage - The JAXB context is re-created in each method call which may cause an PermGen/Meta Space OOM sooner or later]]></name>
+        <configKey><![CDATA[OUTAGE_MEMORY_JAXB_CONTEXT_RE_CREATION]]></configKey>
+    </rule>
+
+</rules>

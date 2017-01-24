@@ -1,0 +1,24 @@
+<p>Local variables have no shared access by multiple threads, so it's meaningless to make it as an lock.</p>
+<pre>
+    <code>
+    public void run()
+    {
+        Object lock=new Object();
+        while( true )
+        {
+            try
+            {
+                synchronized( lock )
+                {
+                   ...//business logic
+                }
+            }
+            catch( Exception e )
+            {
+                LOGGER.error( "Error found:", e );
+            }
+        }
+    }
+    </code>
+</pre>
+<p>The call on <code>synchronized( lock )</code> dose not make any sense, since <code>lock</code> is impossible to be hold by other thread</p>

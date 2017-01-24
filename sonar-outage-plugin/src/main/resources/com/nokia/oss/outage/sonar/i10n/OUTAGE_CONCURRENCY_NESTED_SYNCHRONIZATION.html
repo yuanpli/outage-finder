@@ -1,0 +1,21 @@
+<p>Nested synchronization is error prone, please use explicit lock from <code>java.util.concurrent.locks.Lock</code></p>
+<pre>
+    <code>
+    private Map<String, String> config = new HashMap<>();
+    public void update( String key, String value )
+    {
+        try
+        {
+            lock.lock();
+            if( config.get( key ) != null )
+            {
+                config.put( key, value );
+            }
+        }
+        finally
+        {
+            lock.unlock();
+        }
+    }
+    </code>
+</pre>

@@ -1,0 +1,9 @@
+<p>The <code>InputStream</code>,<code>OutputStream</code>,<code>Reader</code>,<code>Writer</code> is not closed after use.</p>
+<p>
+    On UNIX-like platforms, the OS places a limit on the number of open file descriptors that a process may have at any given time.
+    When the this number is exceed, operations about File/Socket/Thread will fail with an <code>IOException:'Too many opened file'</code>.
+</p>
+<p>
+    An exception those pure in-memory IO resources, such as <code>ByteArrayInputStream</code>, and those resource which is managed by container,
+    such as <code>OutputStream</code> from <code>HttpServletRequest</code> which is managed by the servlet container.
+</p>

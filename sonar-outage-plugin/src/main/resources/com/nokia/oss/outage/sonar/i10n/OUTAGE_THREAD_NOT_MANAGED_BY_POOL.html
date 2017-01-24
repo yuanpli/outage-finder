@@ -1,0 +1,7 @@
+<p>It's a bad practise to start a thread by <code>new Thread()</code> after Java 5, use a <code>ExecutorService</code> created from <code>Executors</code> to execute the task.</p>
+<p>The reason is:</p>
+<ul>
+    <li>Multiple tasks can be executed in the same thread, thread pool make a good utilization of system resource. </li>
+    <li>Avoid single point of your service. For example for a scheduled task, the thread and the task dies in case of any exception, but in a thread pool a new thread is used and the task can recover from failure </li>
+    <li>For management reasons. If a <code>new Thread</code> is used everywhere in the code, then who knows how many threads are there in the runtime. It will be a disaster if any performance issue happened with those threads </li>
+</ul>

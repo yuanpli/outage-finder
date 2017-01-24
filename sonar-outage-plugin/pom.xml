@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>com.nokia.oss.outage</groupId>
+        <artifactId>root</artifactId>
+        <version>1.0</version>
+    </parent>
+    <version>1.0.2</version>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>sonar-outage-plugin</artifactId>
+    <packaging>sonar-plugin</packaging>
+    <name>Sonar Outage Plugin</name>
+    <description>Sonar plugin to find out outage risks</description>
+    <organization>
+        <name>Nokia</name>
+        <url>http://www.nokia.com</url>
+    </organization>
+    <developers>
+        <developer>
+            <name>Harry Chen</name>
+            <email>harry.3.chen@nokia.com</email>
+        </developer>
+    </developers>
+    <properties>
+        <sonar.version>4.5.7</sonar.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.nokia.oss.outage</groupId>
+            <artifactId>outage-risk-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.sonar</groupId>
+            <artifactId>sonar-plugin-api</artifactId>
+            <version>${sonar.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.sonar</groupId>
+            <artifactId>sonar-testing-harness</artifactId>
+            <version>${sonar.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.java</groupId>
+            <artifactId>java-squid</artifactId>
+            <version>3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.sonar.sslr-squid-bridge</groupId>
+            <artifactId>sslr-squid-bridge</artifactId>
+            <version>2.5.3</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.sonar</groupId>
+                <artifactId>sonar-packaging-maven-plugin</artifactId>
+                <version>1.13</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <pluginClass>com.nokia.oss.outage.sonar.SonarOutagePlugin</pluginClass>
+                    <useChildFirstClassLoader>true</useChildFirstClassLoader>
+                    <addMavenDescriptor>false</addMavenDescriptor>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

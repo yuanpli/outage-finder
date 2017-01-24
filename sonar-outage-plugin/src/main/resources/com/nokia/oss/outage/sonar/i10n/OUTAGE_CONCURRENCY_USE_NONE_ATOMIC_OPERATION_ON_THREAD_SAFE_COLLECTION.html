@@ -1,0 +1,27 @@
+<p>When access an concurrent collection, such as <code>ConcurrentHashMap</code>,access by it's concurrent interface, e.g.<code>ConcurrentMap</code></p>
+<p>Take the following code as an example:</p>
+<pre>
+    <code>
+    private ConcurrentHashMap<String, CMObjectEvent> cache = new ConcurrentHashMap<String, CMObjectEvent>();
+
+    public void addToCache( CMObjectEvent event )
+    {
+        if( cache.get( event.getDn() ) == null )
+        {
+            cache.put( event.getDn(), event );
+        }
+    }
+    </code>
+</pre>
+<p>Even if the <code>cache</code> is a thread-safe map, it does not mean the method <code>addToCache</code> is thread safe</p>
+<p>The correct way is to access the <code>cache</code> by <code>ConcurrentMap</code></p>
+<pre>
+    <code>
+    private ConcurrentHashMap<String, CMObjectEvent> cache = new ConcurrentHashMap<String, CMObjectEvent>();
+
+    public void addToCache( CMObjectEvent event )
+    {
+        cache.putIfAbsent( event.getDn(), event );
+    }
+    </code>
+</pre>

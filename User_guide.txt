@@ -1,0 +1,36 @@
+1. This tool require JRE 1.7+
+
+2. Please find the rules under the following link
+   https://workspaces-emea.int.nokia.com/sites/OSSChinaRDOffice/RCAEDA/Forms/AllItems.aspx?RootFolder=%2Fsites%2FOSSChinaRDOffice%2FRCAEDA%2F2015%20Outage%20Reduction%20Proposal%2FCode%20Checking&InitialTabId=Ribbon%2ELibrary&VisibilityContext=WSSTabPersistence
+
+3. Outage risk riskLevel explaination
+   Critical:  The issue will cause an outage, it should be fixed as soon as possible
+   Major:     The issue may cause an outage, we strongly suggest you to fix it
+   Minor:     The issue is a possible an outage risk, please confirm if it will cause an outage case or not.
+   Warning:   The issue show some bad practises in your code, you should be very careful to do this.
+
+4. Supported issue types
+   IO_Unclosed_Resource                              
+   IO_Resource_May_Fail_To_Close                                
+   IO_Resource_As_Return_Value                               
+   IO_Resource_As_Method_Input_Parameter                                
+   IO_Resource_Passed_To_Method_As_Parameter                                
+   Thread_Not_Managed_By_Pool                              
+   Thread_Pool_Without_Size_Limitation                            
+   Thread_Pool_Without_Queue_Size_Limitation                            
+   Thread_Blocking_Queue_Without_Size_Limitation                              
+   Thread_Interrupted_Exception_Caught_Without_Reset_Interruption_Status                              
+   Thread_Interrupted_Exception_Caught_Without_Break_The_Loop                            
+   While_True_Loop_Without_Quit_Statement                              
+   Concurrency_Use_None_Atomic_Operation_On_Thread_Safe_Collection                             
+   Concurrency_Lock_Is_Not_Unlocked_In_Finally_Block                             
+   Concurrency_Synchronized_On_Local_Variable                              
+   Exception_Original_Exception_Ignored_When_Throw_New_Exception                              
+   MISC_Do_Not_Start_Process_In_Java                             
+   
+4. Usage example
+   java -jar outage-risk-finder.jar -source ./src/main/java -output my_outage_risk.csv
+
+5. Limitation
+   This is tool will analyse Java source code to find possible outage risks, it can not detect the runtime behaviour, so the result may be not 100% accurate, but usually the finds are
+   good start point for further investigation

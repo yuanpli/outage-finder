@@ -1,0 +1,26 @@
+<p>The resource may fail to close due to the exception of previous IO operation.</p>
+<p>Take the following code as an example</p>
+<pre><code>
+    public static void copy( File src, File dest ) throws IOException
+      {
+       FileInputStream inputStream = null;
+       FileOutputStream outputStream = null;
+       try
+       {
+         ...//bossiness logic
+       }
+        finally
+       {
+         if( inputStream != null )
+           {
+             inputStream.close();
+            }
+         if( outputStream != null )
+           {
+            outputStream.flush();
+            outputStream.close();
+           }
+       }
+    }
+</code></pre>
+<p>If an <code>IOException</code> is thrown when closing the <code>inputStream</code>, then the <code>outputStream</code> is not closed at all</p>

@@ -1,0 +1,3 @@
+<p>It's a bad practise to return a <code>InputStream</code>,<code>OutputStream</code>,<code>Reader</code>,<code>Writer</code>, except for some utility methods.</p>
+<p>Since it's easy to argue that who is responsible to close the resource! The caller or the creator? The worst case is none!</p>
+<p>A suggestion is to close the resource exactly in the same method where the resource is opened.</p>

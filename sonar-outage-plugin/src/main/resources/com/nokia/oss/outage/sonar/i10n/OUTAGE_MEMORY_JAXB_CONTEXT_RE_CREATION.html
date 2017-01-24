@@ -1,0 +1,18 @@
+<p>The <code>javax.xml.bind.JAXBContext</code> is created and assigned to a local variable.</p>
+<p>
+    JAXB has a default optimization for data binding, which will generate extra classes for each field even if you
+    already have getter/setter in your own class.
+    Those generated classes have a naming pattern as:
+    <code>{your_own_class_name}$JaxbAccessorF_{your_field_name}</code>
+    The problem is every time when the JAXBContext is created, those classes are re-generated and loaded into the class
+    loader. If you do this in the method, then
+    you will get and PermGen/Meta space OOM sooner or later. This can be observed by check your application class
+    loader.
+</p>
+Reference the <a href="http://bitsandapint.blogspot.fi/2013/08/permgen-crashes-due-to-class-loader.html">permgen-crashes-due-to-class-loader</a> for more information.
+</p>
+Important: JAX-WS has the same problem since it use JAXB for data binding.
+</p>
+<p>
+    In practise, re-use JAXBContext since it is thread safe, but create new Marshaller/UnMarshaller in every call.
+</p>
